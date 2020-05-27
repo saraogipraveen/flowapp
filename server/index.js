@@ -25,14 +25,10 @@ app.get('/', (req, res) => {
     res.send('Hello flowapp!')
 })
 
-const usersRouter = require('./routes/users')
-const workflowsRouter = require('./routes/workflows')
-const nodesRouter = require('./routes/nodes')
 
-
-app.use('/users',usersRouter)
-app.use('/workflows',workflowsRouter)
-app.use('/nodes',nodesRouter)
+app.use('/users',require('./routes/users'))
+app.use('/workflows',require('./routes/workflows'))
+app.use('/nodes',require('./routes/nodes'))
 
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
