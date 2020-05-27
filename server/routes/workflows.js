@@ -55,12 +55,9 @@ router.post("/create", isAuthorized, async (req, res) => {
 
 router.delete("/delete", isAuthorized, async (req, res) => {
     try {
-        console.log("req", req)
     const { workflowId } = req.query;
-    console.log("workflowId", workflowId)
     
     let result = await Workflow.deleteOne({_id: workflowId});
-    console.log("result", result)
 
     if(res)
       return res.status(204).json({

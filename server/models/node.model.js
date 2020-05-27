@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const nodeSchema = new Schema({
-  text: {
+  title: {
     type: String,
     required: true
   },
@@ -13,7 +13,7 @@ const nodeSchema = new Schema({
   },
   workflow: {
     type: Schema.Types.ObjectId,
-    ref: "Workflow"
+    ref: "workflow"
   }
 })
 
