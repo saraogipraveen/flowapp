@@ -1,0 +1,17 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.right-minus-3by2{
+  right: -1.5rem;
+}
+
+.top-minus-3by2{
+  top: -1.5rem
+}
+
+.left-100{
+  left: 100%;
+}
