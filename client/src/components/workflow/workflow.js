@@ -2,6 +2,9 @@ import React from 'react';
 import Header from '../header';
 import tick from '../../assets/icons/tick.svg';
 import rightarrow from '../../assets/icons/rightarrow.svg';
+import shuffle from '../../assets/icons/shuffle.svg';
+import plus from '../../assets/icons/plus.svg';
+import cross from '../../assets/icons/cross.svg';
 
 function workflow(props) {
 
@@ -22,10 +25,10 @@ function workflow(props) {
           <input className="border border-black p-2 shadow-lg" type="text" value="workflow name " />
         </div>
         <div className="flex">
-          <button className="px-3 mx-1 bg-purple-800 text-white rounded ">Shuffle</button>
-          <button className="px-3 mx-1 bg-red-600 text-white rounded ">Delete</button>
-          <button className="px-3 mx-1 bg-green-600 text-white rounded ">Add Note</button>
-          <button className="px-3 mx-1 bg-blue-600 text-white rounded ">Save</button>
+          <button className="flex items-center px-3 mx-1 bg-purple-800 text-white rounded "><img className="h-4 w-4 mr-2 " src={shuffle} alt=""/> Shuffle</button>
+          <button className="flex items-center px-3 mx-1 bg-red-600 text-white rounded "><img className="h-3 w-3 mr-2" src={cross} alt=""/> Delete</button>
+          <button className="flex items-center px-3 mx-1 bg-green-600 text-white rounded "><img className="h-3 w-3 mr-2" src={plus} alt=""/> Add Note</button>
+          <button className=" px-3 mx-1 bg-blue-600 text-white rounded "> Save</button>
         </div>
       </div>
       <div className="grid grid-cols-4 gap-12 mx-10 my-10">
