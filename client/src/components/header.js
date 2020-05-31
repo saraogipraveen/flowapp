@@ -1,5 +1,5 @@
 import React from 'react';
-import flowicon from '../assets/flowicon.png';
+import flowicon from '../assets/icons/flowicon.png';
 
 function header(props) {
     return (
