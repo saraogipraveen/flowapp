@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
         }
         else {
 
-            return res.status(401).json({message :'Unauthorized access detected'})
+            return res.status(400).json({message :'Unauthorized access detected'})
         }
 
 

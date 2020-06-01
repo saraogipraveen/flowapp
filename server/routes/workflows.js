@@ -2,36 +2,19 @@ const router = require("express").Router();
 const Workflow = require("../models/workflow.model");
 const isAuthorized = require("../middlewares/auth");
 
-/**
- * @path /api/workflow/read
- * @access Public
- * @method POST
- */
-
-router.post("/read", isAuthorized, async (req, res) => {
-  let userId = req.body.user;
-  let workflows = await Workflow.find({creator: userId});
-
-  if(workflows) {
-    return res.status(200).json({
-      message: "workflows",
-      workflows
-    });
-  }
-})
 
 /**
- * @path /api/workflow/create
+ * @path workflows/create
  * @access Public
  * @method POST
  */
 
 router.post("/create", isAuthorized, async (req, res) => {
   try {
-    const { user: userId, workflowName } = req.body;
-    
+    const { user: userId } = req.body;
+
     let newWorkflow = new Workflow({
-      name: workflowName,
+      name: 'workflow Name',
       creator: userId
     });
 
@@ -47,23 +30,68 @@ router.post("/create", isAuthorized, async (req, res) => {
 });
 
 
+
 /**
- * @path /api/workflow/delete
+ * @path workflows/read
+ * @access Public
+ * @method POST
+ */
+
+router.post("/read", isAuthorized, async (req, res) => {
+  let userId = req.body.user;
+  let workflows = await Workflow.find({ creator: userId });
+
+  if (workflows) {
+    return res.status(200).json({
+      message: "workflows",
+      workflows
+    });
+  }
+})
+
+
+/**
+ * @path workflows/update
+ * @access Public
+ * @method POST
+ */
+
+router.post("/update", isAuthorized, async (req, res) => {
+  try {
+    const { id, status, name } = req.body;
+
+    Workflow.findOneAndUpdate({ _id : id }, { workflow_status: status, name }, { new: true }, function (data) {
+      console.log(data)
+    })
+
+    if (res)
+      return res.status(200).json({
+        message: "Workflow Updated successfully. 😊",
+      });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+
+/**
+ * @path workflows/delete
  * @access Public
  * @method POST
  */
 
 router.delete("/delete", isAuthorized, async (req, res) => {
-    try {
-    const { workflowId } = req.query;
-    
-    let result = await Workflow.deleteOne({_id: workflowId});
+  try {
+    const { workflowId } = req.body;
 
-    if(res)
+    let result = await Workflow.deleteOne({ _id: workflowId });
+
+    if (res)
       return res.status(204).json({
         message: "Workflow deleted successfully. 😊",
         result
-    });
+      });
   } catch (error) {
     console.log(error);
   }

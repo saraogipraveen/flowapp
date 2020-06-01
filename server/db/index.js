@@ -5,7 +5,7 @@ const uri = process.env.ATLAS_URI
 mongoose
     .connect(uri,
         {
-            useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex : true
+            useFindAndModify:false,  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex : true
         }
     )
     .catch(e => {
