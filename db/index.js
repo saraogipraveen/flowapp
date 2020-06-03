@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose')
 
-const uri = process.env.ATLAS_URI
+const uri = process.env.ATLAS_URI || 'mongodb+srv://flowapp:flowapppassword@flowapp-7dshm.mongodb.net/test?retryWrites=true&w=majority'
 mongoose
     .connect(uri,
         {
