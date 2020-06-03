@@ -50,7 +50,7 @@ router.post("/register", async (req, res) => {
  * @access Public
  * @method POST
  */
-router.post("/login", async (req, res) => {
+router.post("/login",cors(), async (req, res) => {
     try {
       const { email, password } = req.body;
   
