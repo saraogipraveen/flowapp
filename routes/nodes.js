@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Node = require("../models/node.model");
 const Workflow = require("../models/workflow.model");
-const isAuthorized = require("../middlewares/Auth");
+const isAuthorized = require("../middlewares/auth");
 
 /**
  * @path /node/create
