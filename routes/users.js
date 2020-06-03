@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const cors = require('cors')
+
 
 let User = require('../models/user.model');
-
+router.use(cors());
 /**
  * @path /api/users/register
  * @access Public
