@@ -12,6 +12,7 @@ function Workflow(props) {
 
   const [workflowNodes, setWorkflowNodes] = useState({})
   const [workflowName, setWorkflowName] = useState('')
+  const [shuffleState, setShuffleState] = useState(false)
   const token = localStorage.getItem('auth-token')
   const { workflowId } = props.match.params
 
@@ -22,6 +23,7 @@ function Workflow(props) {
     const response = await Api.get('nodes/read/' + workflowId, token)
     setWorkflowNodes(response.data)
     setWorkflowName(response.data.name)
+    checkShuffleStatus(response.data.nodes);
   }
 
 
@@ -35,8 +37,10 @@ function Workflow(props) {
   }, [])
 
   const shuffleHandler = () => {
-  console.log("shuffleHandler -> shuffleHandler")
-
+    console.log("shuffleHandler -> shuffleHandler")
+    const { nodes } = workflowNodes;
+    nodes.sort(() => Math.random() - 0.5)
+    setWorkflowNodes({ ...workflowNodes, ...nodes })
   }
 
   const deleteHandler = async () => {
@@ -53,8 +57,11 @@ function Workflow(props) {
     getNodes();
   }
 
-  const saveHandler = async() => {
-    await Api.post('nodes/create', workflowNodes.nodes, token)
+  const saveHandler = async () => {
+    let resp = await Api.post('nodes/update', { nodes: workflowNodes.nodes }, token)
+    if(resp.message){
+      alert(resp.message)
+    }
     getNodes();
   }
 
@@ -92,7 +99,14 @@ function Workflow(props) {
         break;
     }
     setWorkflowNodes({ ...workflowNodes, ...nodes })
+    checkShuffleStatus(nodes)
+  }
 
+
+  const checkShuffleStatus = (nodes = []) => {
+    let flag = false;
+    nodes.map(n => n.node_status !== STATUS.COMPLETED ? flag = true : null)
+    setShuffleState(!flag)
 
   }
 
@@ -103,7 +117,7 @@ function Workflow(props) {
           <input onBlur={() => updateWorkflow()} onChange={(e) => setWorkflowName(e.target.value)} className="border border-black p-2 shadow-lg" type="text" value={workflowName} />
         </div>
         <div className="flex">
-          <button onClick={shuffleHandler} className="opacity-50 cursor-not-allowed flex items-center px-3 mx-1 bg-purple-800 text-white rounded "><img className="h-4 w-4 mr-2 " src={shuffle} alt="" /> Shuffle</button>
+          <button onClick={shuffleHandler} disabled={!shuffleState} className={`${shuffleState ? '' : 'opacity-50 cursor-not-allowed'} flex items-center px-3 mx-1 bg-purple-800 text-white rounded `}><img className="h-4 w-4 mr-2 " src={shuffle} alt="" /> Shuffle</button>
           <button onClick={deleteHandler} className="flex items-center px-3 mx-1 bg-red-600 text-white rounded "><img className="h-3 w-3 mr-2" src={cross} alt="" /> Delete</button>
           <button onClick={addNodeHandler} className="flex items-center px-3 mx-1 bg-green-600 text-white rounded "><img className="h-3 w-3 mr-2" src={plus} alt="" /> Add Note</button>
           <button onClick={saveHandler} className=" px-3 mx-1 bg-blue-600 text-white rounded "> Save</button>
@@ -132,7 +146,7 @@ function Workflow(props) {
 
             return <div className="flex flex-col cursor-pointer relative justify-between border border-black p-4 my-4 rounded shadow">
               <span onClick={() => statusHandler(node)} className={`absolute right-minus-3by2 top-minus-3by2 h-10 w-10  p-3 ${tickColor} ${hoverTickColor} rounded-full shadow`}><img className="" src={tick} alt="tick" /></span>
-              {((index + 1) % 4 !== 0 && index + 1 !== workflowNodes.length && workflowNodes.length == 1) ?
+              {((index + 1) % 4 !== 0 && index + 1 !== workflowNodes.nodes.length) ?
                 <span className="absolute float-right left-100 w-12 mt-20">
                   <img className="" src={rightarrow} alt="rightarrow" /></span> : ''}
               <input onChange={(e) => nodeNameChangeHandler(node._id, e.target.value)} className="shadow bg-green-200 mb-2 border border-black shadow p-3" type="text" value={node.title} />

@@ -48,6 +48,31 @@ router.post("/create", isAuthorized, async (req, res) => {
   }
 });
 
+/**
+ * @path /node/update
+ * @access Public
+ * @method UPDATE
+ */
+router.post("/update", isAuthorized, async (req, res) => {
+  try {
+    const { nodes } = req.body;
+
+
+    nodes.map(n=>{
+      Node.findOneAndUpdate({ _id : n._id }, { node_status: n.node_status, title: n.title, desc: n.desc }, { new: true }, function (data) {
+        console.log(data)
+      })
+    })
+
+
+    res.status(201).json({
+      message: "Node Successfully Saved. 😊",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 
 /**
  * @path nodes/delete
