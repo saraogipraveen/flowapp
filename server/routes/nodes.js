@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const Node = require("../models/node.model");
+const Workflow = require("../models/workflow.model");
 const isAuthorized = require("../middlewares/Auth");
 
 /**
- * @path /api/node/create
+ * @path /node/create
  * @access Public
  * @method POST
  */
@@ -11,10 +12,11 @@ router.get("/read/:workflowId", isAuthorized, async (req, res) => {
   try {
     const { workflowId } = req.params;
 
-    const result = await Node.find({workflow: workflowId});
+    const nodes = await Node.find({ workflow: workflowId });
+    const workflow = await Workflow.findById(workflowId)
 
     return res.status(200).json({
-      data: result
+      data: { ...workflow._doc, nodes }
     });
   } catch (error) {
     console.log(error);
@@ -22,16 +24,16 @@ router.get("/read/:workflowId", isAuthorized, async (req, res) => {
 });
 
 /**
- * @path /api/node/create
+ * @path /node/create
  * @access Public
  * @method POST
  */
 router.post("/create", isAuthorized, async (req, res) => {
   try {
-    const { workflowId, nodeTitle  } = req.body;
+    const { workflowId } = req.body;
 
     let newNode = new Node({
-      title: nodeTitle,
+      title: 'New Node',
       workflow: workflowId,
     });
 
@@ -47,6 +49,27 @@ router.post("/create", isAuthorized, async (req, res) => {
 });
 
 
+/**
+ * @path nodes/delete
+ * @access Public
+ * @method POST
+ */
+
+router.delete("/delete", isAuthorized, async (req, res) => {
+  try {
+    const { nodeId } = req.body;
+
+    let result = await Node.deleteOne({ _id: nodeId });
+
+    if (res)
+      return res.status(204).json({
+        message: "Workflow deleted successfully. 😊",
+        result
+      });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 
 

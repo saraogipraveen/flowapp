@@ -15,6 +15,11 @@ import { AuthContext } from './context/AuthContext';
 import Authenticate from './hoc/authenticate';
 
 
+export const STATUS = {
+  PENDING: 'pending',
+  COMPLETED: 'completed',
+  PROGRESS : 'progress'
+}
 
 function App() {
 

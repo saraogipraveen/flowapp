@@ -1,17 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import mail from '../../assets/icons/mail.svg'
 import passwordIcon from '../../assets/icons/password.svg'
-import { AuthContext } from '../../context/AuthContext';
-import { BASE_URL } from '../../App';
 import Api from '../../api';
 
 
 function Login({ history }) {
 
-
-
-  const { user, setUser } = useContext(AuthContext)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -23,10 +18,9 @@ function Login({ history }) {
       let response = await Api.post('users/login', { email, password })
       console.log("submitHandler -> response", response)
       if (response.message) {
-        setUser({ userId: response.userId, token: response.token })
         localStorage.setItem('auth-token',response.token)
         localStorage.setItem('userId',response.userId)
-        history.push('/')
+        window.location.href= '/'
       }
     }
     catch (error) {

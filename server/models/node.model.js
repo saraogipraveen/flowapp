@@ -11,6 +11,9 @@ const nodeSchema = new Schema({
     type: String,
     default: "pending"
   },
+  desc: {
+    type: String,
+  },
   workflow: {
     type: Schema.Types.ObjectId,
     ref: "workflow"

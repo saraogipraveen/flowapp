@@ -70,7 +70,7 @@ router.post("/login", async (req, res) => {
       let payload = { email: user.email, userId: user.id };
   
       let token = await jwt.sign(payload, process.env.AUTHORIZATION_TOKEN, {
-        expiresIn: "1h",
+        expiresIn: "4h",
       });
   
       return res.status(200).json({

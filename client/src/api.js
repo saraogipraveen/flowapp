@@ -3,8 +3,14 @@
 const BASE_URL = 'http://localhost:5000/'
 
 
-const get = async (url) => {
-  const res = await fetch(BASE_URL + url)
+const get = async (url,token =null) => {
+  const res = await fetch(BASE_URL + url,{
+    method: "GET",
+    headers: {
+      "Authorization": token ? `Bearer ${token}` : '',
+      "Content-Type": "application/json",
+    },
+  })
   const response = res.json();
   if(response.error){
     alert(response.error)
