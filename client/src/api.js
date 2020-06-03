@@ -1,6 +1,7 @@
 
 
-const BASE_URL = 'http://localhost:5000/'
+// const BASE_URL = 'http://localhost:5000/'
+const BASE_URL = 'https://fast-garden-08231.herokuapp.com/'
 
 
 const get = async (url,token =null) => {
