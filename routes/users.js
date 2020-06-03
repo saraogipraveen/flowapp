@@ -1,11 +1,9 @@
 const router = require('express').Router();
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const cors = require('cors')
-
 
 let User = require('../models/user.model');
-router.use(cors());
+
 /**
  * @path /api/users/register
  * @access Public
@@ -50,7 +48,7 @@ router.post("/register", async (req, res) => {
  * @access Public
  * @method POST
  */
-router.post("/login",cors(), async (req, res) => {
+router.post("/login", async (req, res) => {
     try {
       const { email, password } = req.body;
   
