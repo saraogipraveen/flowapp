@@ -33,9 +33,9 @@ app.get('/', (req, res) => {
 })
 
 
-app.use('/users',require('./routes/users'))
-app.use('/workflows',require('./routes/workflows'))
-app.use('/nodes',require('./routes/nodes'))
+app.use('/users',cors(),require('./routes/users'))
+app.use('/workflows', cors(),require('./routes/workflows'))
+app.use('/nodes',cors(), require('./routes/nodes'))
 
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

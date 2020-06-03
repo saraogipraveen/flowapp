@@ -10,6 +10,7 @@ const get = async (url,token =null) => {
     headers: {
       "Authorization": token ? `Bearer ${token}` : '',
       "Content-Type": "application/json",
+      'Access-Control-Allow-Origin':'*'
     },
   })
   const response = res.json();
@@ -26,6 +27,7 @@ const post = async (url, data, token = null) => {
     headers: {
       "Authorization": token ? `Bearer ${token}` : '',
       "Content-Type": "application/json",
+      'Access-Control-Allow-Origin':'*'
     },
     body: JSON.stringify(data),
   })
@@ -43,6 +45,7 @@ const _delete = async (url, data, token = null) => {
     headers: {
       "Authorization": token ? `Bearer ${token}` : '',
       "Content-Type": "application/json",
+      'Access-Control-Allow-Origin':'*'
     },
     body: JSON.stringify(data),
   })
