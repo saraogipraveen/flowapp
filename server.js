@@ -12,12 +12,8 @@ const apiPort = process.env.PORT || 5000
 
 // MIDDLEWARES
 
-var corsOptions = {
-    origin: 'https://flowapp.netlify.app',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
 
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json())
 
 app.use((req, res, next) => {
