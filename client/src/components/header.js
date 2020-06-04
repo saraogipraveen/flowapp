@@ -10,7 +10,8 @@ function Header({ history }) {
     const logout = () => {
         localStorage.removeItem('auth-token')
         localStorage.removeItem('userId')
-        window.location.href= '/login'
+        window.location.href= '/'
+
     }
 
     return (
