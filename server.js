@@ -14,7 +14,6 @@ const apiPort = process.env.PORT || 5000
 
 
 // app.use(cors())
-app.use(express.json())
 
 // CORS -> Cross-Origin Resource Sharing
 // Handling CORS errors
@@ -22,21 +21,22 @@ app.use((req, res, next) => {
     // we pass * as second arg because we want to allow access to everyone
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     );
     if (req.method === "OPTIONS") {
-      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-      return res.status(200).json({});
+        res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+        return res.status(200).json({});
     }
     next();
-  });
+});
 
 // MONDOGDB CONNECTION CHECK 
 db.once('open', () => console.log('MongoDB connected'))
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 
+app.use(express.json())
 // ROUTES
 app.get('/', (req, res) => {
     res.send('Hello flowapp!')
