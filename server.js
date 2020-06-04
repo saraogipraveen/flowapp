@@ -12,19 +12,19 @@ const apiPort = process.env.PORT || 5000
 
 // MIDDLEWARES
 
-app.use(cors())
+// app.use(cors())
 app.use(express.json())
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  
+    res.header("Access-Control-Allow-Methods", "OPTIONS, GET, POST,  PUT, DELETE");
+
     next();
-  });
+});
 
 // MONDOGDB CONNECTION CHECK 
-db.once('open',()=> console.log('MongoDB connected'))
+db.once('open', () => console.log('MongoDB connected'))
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 
@@ -33,10 +33,10 @@ app.get('/', (req, res) => {
     res.send('Hello flowapp!')
 })
 
-app.options('*', cors()) // include before other routes
+// app.options('*', cors()) // include before other routes
 
-app.use('/users',require('./routes/users'))
-app.use('/workflows',require('./routes/workflows'))
+app.use('/users', require('./routes/users'))
+app.use('/workflows', require('./routes/workflows'))
 app.use('/nodes', require('./routes/nodes'))
 
 
