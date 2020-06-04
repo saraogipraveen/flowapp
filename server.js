@@ -13,7 +13,7 @@ const apiPort = process.env.PORT || 5000
 // MIDDLEWARES
 
 
-app.use(cors())
+// app.use(cors())
 app.use(express.json())
 
 // CORS -> Cross-Origin Resource Sharing
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
     res.send('Hello flowapp!')
 })
 
-app.options('*', cors()) // include before other routes
+// app.options('*', cors()) // include before other routes
 
 app.use('/users', require('./routes/users'))
 app.use('/workflows', require('./routes/workflows'))
