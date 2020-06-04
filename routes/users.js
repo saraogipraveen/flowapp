@@ -69,7 +69,7 @@ router.post("/login", async (req, res) => {
   
       let payload = { email: user.email, userId: user.id };
   
-      let token = await jwt.sign(payload, process.env.AUTHORIZATION_TOKEN, {
+      let token = await jwt.sign(payload, process.env.AUTHORIZATION_TOKEN || 'flowappaccesstoken', {
         expiresIn: "4h",
       });
   
