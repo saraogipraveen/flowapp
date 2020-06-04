@@ -19,7 +19,7 @@ function Home({history}) {
   const userId = localStorage.getItem('userId')
 
   const getWorkflows = async () => {
-    const response = await Api.post('workflows/read', { userId: userId }, token)
+    const response = await Api.post('workflows/read', {  userId }, token)
     if (response.message) {
       const workflows = {};
       response.workflows.map(w => {
@@ -87,7 +87,7 @@ function Home({history}) {
       <div className="flex justify-between border border-b py-5 px-3">
         <div className="flex">
           <input onChange={searchHandler} style={{ backgroundImage: `url(${search})`, backgroundRepeat: 'no-repeat', backgroundSize: '17px 17px', backgroundPosition: '8px 12px' }} className=" rounded-lg border border-black px-20 pl-8 py-1 mx-4 " type="text" value={searchText} placeholder="Search Workflows" />
-          <button className="flex items-center shadow border border-black rounded p-2 pr-6  ml-4 "><img className="h-3 w-3 mx-1 mr-3" src={filter} alt="" />Filter</button>
+          {/* <button className="flex items-center shadow border border-black rounded p-2 pr-6  ml-4 "><img className="h-3 w-3 mx-1 mr-3" src={filter} alt="" />Filter</button> */}
         </div>
         <div>
           <button onClick={createWorkflow} className="flex items-center  rounded shadow bg-green-400 hover:bg-green-600 p-2 text-white"><img className="h-3 w-3 mx-1" src={plus} alt="plus" />Create Workflow</button>

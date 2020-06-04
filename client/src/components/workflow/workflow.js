@@ -37,7 +37,6 @@ function Workflow(props) {
   }, [])
 
   const shuffleHandler = () => {
-    console.log("shuffleHandler -> shuffleHandler")
     const { nodes } = workflowNodes;
     nodes.sort(() => Math.random() - 0.5)
     setWorkflowNodes({ ...workflowNodes, ...nodes })
@@ -82,8 +81,6 @@ function Workflow(props) {
   }
 
   const statusHandler = (node) => {
-    console.log("statusHandler -> node", node)
-    console.log("statusHandler -> STATUS.PENDING", STATUS.PENDING)
     const status = node.node_status;
     const { nodes } = workflowNodes;
     const index = nodes.findIndex((n) => n._id === node._id)

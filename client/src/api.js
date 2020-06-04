@@ -1,7 +1,7 @@
 
 
-// const BASE_URL = 'http://localhost:5000/'
-const BASE_URL = 'https://fast-garden-08231.herokuapp.com/'
+const BASE_URL = 'http://localhost:5000/'
+// const BASE_URL = 'https://fast-garden-08231.herokuapp.com/'
 
 
 const get = async (url,token =null) => {
@@ -9,8 +9,7 @@ const get = async (url,token =null) => {
     method: "GET",
     headers: {
       "Authorization": token ? `Bearer ${token}` : '',
-      "Content-Type": "application/json",
-      'Access-Control-Allow-Origin':'*'
+      "Content-Type": "application/json"
     },
   })
   const response = res.json();
@@ -26,8 +25,8 @@ const post = async (url, data, token = null) => {
     method: "POST",
     headers: {
       "Authorization": token ? `Bearer ${token}` : '',
-      "Content-Type": "application/json",
-      'Access-Control-Allow-Origin':'*'
+      "Content-Type": "application/json"
+
     },
     body: JSON.stringify(data),
   })
@@ -44,8 +43,7 @@ const _delete = async (url, data, token = null) => {
     method: "DELETE",
     headers: {
       "Authorization": token ? `Bearer ${token}` : '',
-      "Content-Type": "application/json",
-      'Access-Control-Allow-Origin':'*'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(data),
   })

@@ -11,7 +11,7 @@ const isAuthorized = require("../middlewares/auth");
 
 router.post("/create", isAuthorized, async (req, res) => {
   try {
-    const { user: userId } = req.body;
+    const { userId } = req.body;
 
     let newWorkflow = new Workflow({
       name: 'workflow Name',
@@ -38,7 +38,7 @@ router.post("/create", isAuthorized, async (req, res) => {
  */
 
 router.post("/read", isAuthorized, async (req, res) => {
-  let userId = req.body.user;
+  let {userId} = req.body;
   let workflows = await Workflow.find({ creator: userId });
 
   if (workflows) {
