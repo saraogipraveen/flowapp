@@ -3,3 +3,4 @@ client/node_modules
 .env
 # Local Netlify folder
 .netlify
+request.rest

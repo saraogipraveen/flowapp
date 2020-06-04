@@ -5,7 +5,6 @@ const cors = require('cors')
 require('dotenv').config()
 
 
-const db = require('./db')
 
 const app = express()
 const apiPort = process.env.PORT || 5000
@@ -32,6 +31,7 @@ app.use((req, res, next) => {
 });
 
 // MONDOGDB CONNECTION CHECK 
+const db = require('./db')
 db.once('open', () => console.log('MongoDB connected'))
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
