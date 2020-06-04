@@ -13,7 +13,7 @@ const apiPort = process.env.PORT || 5000
 // MIDDLEWARES
 
 var corsOptions = {
-    origin: 'https://flowapp.netlify.app/',
+    origin: 'https://flowapp.netlify.app',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }
 
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
     res.send('Hello flowapp!')
 })
 
-// app.options('*', cors()) // include before other routes
+app.options('*', cors()) // include before other routes
 
 app.use('/users', require('./routes/users'))
 app.use('/workflows', require('./routes/workflows'))
